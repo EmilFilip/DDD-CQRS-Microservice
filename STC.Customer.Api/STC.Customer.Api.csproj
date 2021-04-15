@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\STC.Customer.Application\STC.Customer.Application.csproj" />
+    <ProjectReference Include="..\STC.Customer.Infrastructure\STC.Customer.Infrastructure.csproj" />
+    <ProjectReference Include="..\STC.Shared.Cqrs\STC.Shared.Cqrs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+  </ItemGroup>
+
+
+</Project>

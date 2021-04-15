@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DBContexts\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\STC.Customer.Application\STC.Customer.Application.csproj" />
+    <ProjectReference Include="..\STC.Customer.Domain\STC.Customer.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
