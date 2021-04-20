@@ -3,9 +3,9 @@ using STC.Shared.Cqrs.Command;
 
 namespace STC.Customer.Application.Commands.Parameters
 {
-    public class CustomerCommandParameters : ICommand
+    public class UpdateCustomerCommandParameters : ICommand
     {
-        public CustomerCommandParameters(
+        public UpdateCustomerCommandParameters(
            Guid customerId,
            int age)
         {

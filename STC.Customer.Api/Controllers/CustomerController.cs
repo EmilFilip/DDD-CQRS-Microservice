@@ -46,10 +46,21 @@ namespace STC.Customer.Api.Controllers
 
         [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateCustomer([FromBody] CustomerApiParameters parameters)
+        public async Task<IActionResult> InsertNewCustomer([FromBody] InsertCustomerApiParameters parameters)
         {
             await _commandExecutor.ExecuteAsync(
-                new CustomerCommandParameters(
+                new InsertCustomerCommandParameters(
+                    age: parameters.Age));
+
+            return Ok();
+        }
+
+        [HttpPut("")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerApiParameters parameters)
+        {
+            await _commandExecutor.ExecuteAsync(
+                new UpdateCustomerCommandParameters(
                     customerId: parameters.CustomerId,
                     age: parameters.Age));
 

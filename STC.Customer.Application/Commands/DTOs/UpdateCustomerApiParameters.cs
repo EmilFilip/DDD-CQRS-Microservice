@@ -2,7 +2,7 @@
 
 namespace STC.Customer.Application.Commands.DTOs
 {
-    public class CustomerApiParameters
+    public class UpdateCustomerApiParameters
     {
         public Guid CustomerId { get; set; }
         public int Age { get; set; }
