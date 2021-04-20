@@ -1,12 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using STC.Customer.Application.Configuration;
-using STC.Customer.Infrastructure.Configuration;
-using STC.Customer.Infrastructure.DBContexts;
+using STC.Customer.Api.Configuration;
 
 namespace STC.Customer.Api
 {
@@ -22,18 +19,13 @@ namespace STC.Customer.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CustomerDbContext>(
-            options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("CustomerDbConnection"));
-            });
             services.AddControllers();
-            services.RegisterApplicationContainer(Configuration);
-            services.AddRepositories();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Customer Microservice", Version = "v1" });
             });
+            services.RegisterDependencies(Configuration);
+            services.AddServiceBus(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

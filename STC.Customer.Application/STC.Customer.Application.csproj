@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\STC.Customer.Domain\STC.Customer.Domain.csproj" />
     <ProjectReference Include="..\STC.Shared.Cqrs\STC.Shared.Cqrs.csproj" />
+    <ProjectReference Include="..\STC.Shared.Infrastructure\STC.Shared.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
