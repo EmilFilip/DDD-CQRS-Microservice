@@ -2,12 +2,8 @@
 
 namespace STC.Customer.Application.Events
 {
-    public class CustomerUpdated
+    public interface CustomerUpdated
     {
-        public CustomerUpdated(Guid customerId)
-        {
-            CustomerId = customerId;
-        }
-        public Guid CustomerId { get; private set; }
+        public Guid CustomerId { get; }
     }
 }

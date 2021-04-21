@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using STC.Shared.MassTransitBus.HostedService;
@@ -21,12 +21,12 @@ namespace STC.Customer.Job
         public static IHostBuilder CreateHostBuilder(string[] args) =>
                 Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
-        {
-            var configuration = ConfigurationHelper.GetDefaultConfiguration();
+                {
+                    var configuration = ConfigurationHelper.GetDefaultConfiguration();
 
-            services.RegisterCommonContainer(configuration);
-            services.RegisterMessageBroker(configuration);
-            services.AddSingleton<IHostedService, BusHostedService>();
-        });
+                    services.RegisterCommonContainer(configuration);
+                    services.RegisterMessageBroker(configuration);
+                    services.AddSingleton<IHostedService, BusHostedService>();
+                });
     }
 }

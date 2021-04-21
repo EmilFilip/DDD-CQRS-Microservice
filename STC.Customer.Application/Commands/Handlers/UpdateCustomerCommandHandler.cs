@@ -26,9 +26,26 @@ namespace STC.Customer.Application.Commands.Handlers
             await _customerRepository
                 .UpdateCustomerAsync(command.CustomerId, command.Age);
 
-            await _serviceBus.SendAsync<CustomerUpdated>(
-                    new CustomerUpdated(command.CustomerId),
-                    "Customer");
+            try
+            {
+                await _serviceBus.PublishAsync<CustomerUpdated>(
+                        new { command.CustomerId });
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            try
+            {
+                await _serviceBus.SendAsync<CustomerUpdated>(
+                    new { command.CustomerId },
+                    "CustomerService");
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 }

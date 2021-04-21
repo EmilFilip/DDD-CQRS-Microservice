@@ -1,6 +1,7 @@
 ﻿using System;
 using GreenPipes;
 using MassTransit;
+using MassTransit.RabbitMqTransport;
 
 namespace STC.Shared.MassTransitBus.BusConfigurations
 {
@@ -9,11 +10,12 @@ namespace STC.Shared.MassTransitBus.BusConfigurations
         public static IBusControl ConfigureBus(
             string rabbitMQHostUri,
             string rabbitMQUsername,
-            string rabbitMQPassword)
+            string rabbitMQPassword,
+            Action<IRabbitMqBusFactoryConfigurator, IRabbitMqHost> serviceBusConfigurator = null)
         {
             var busControl = Bus.Factory.CreateUsingRabbitMq(busConfig =>
             {
-                busConfig.Host(
+                var hostConfig = busConfig.Host(
                     hostAddress: new Uri(rabbitMQHostUri),
                     configure: host =>
                     {
@@ -28,6 +30,11 @@ namespace STC.Shared.MassTransitBus.BusConfigurations
                         initialInterval: TimeSpan.FromMilliseconds(100),
                         intervalIncrement: TimeSpan.FromMilliseconds(100));
                 });
+
+                serviceBusConfigurator?
+                    .Invoke(
+                        arg1: busConfig,
+                        arg2: hostConfig);
             });
 
             return busControl;

@@ -1,19 +1,50 @@
 ﻿using System;
-using System.Text;
+using System.Globalization;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
+using MassTransit;
 using STC.Shared.Infrastructure.ServiceBus;
 
 namespace STC.Shared.MassTransitBus
 {
     public class MasstransitBus : IServiceBus
     {
-        public async Task SendAsync<T>(
-            T command,
+        public const string CreatedAtHeaderKey = "created-at";
+
+        private readonly IBusControl _masstransitBus;
+
+        public MasstransitBus(IBusControl masstransitBus)
+        {
+            _masstransitBus = masstransitBus ?? throw new ArgumentNullException(nameof(masstransitBus));
+        }
+
+        public Task PublishAsync<T>(object message) where T : class
+        {
+            return PublishAsync<T>(
+                message: message,
+                messageId: Guid.NewGuid(),
+                createdAt: DateTime.UtcNow);
+        }
+
+        protected async Task PublishAsync<TMessage>(
+            object message,
+            Guid messageId,
+            DateTime createdAt)
+            where TMessage : class
+        {
+            await _masstransitBus.Publish<TMessage>(
+                values: message,
+                callback: ctx =>
+                    SetupSendContext(
+                        ctx: ctx,
+                        messageId: messageId,
+                        createdAt: createdAt));
+        }
+
+        public Task SendAsync<T>(
+            object command,
             string queue) where T : class
         {
-             await SendAsync<T>(
+            return SendAsync<T>(
                 command: command,
                 queue: queue,
                 messageId: Guid.NewGuid(),
@@ -27,17 +58,59 @@ namespace STC.Shared.MassTransitBus
             DateTime createdAt)
             where TMessage : class
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
-            {
-                var eventName = command.GetType().Name;
-                channel.QueueDeclare(eventName, false, false, false, null);
-                var message = JsonConvert.SerializeObject(command);
-                var body = Encoding.UTF8.GetBytes(message);
+            var destinationQueueUri = new Uri(baseUri: _masstransitBus.Address, relativeUri: queue);
+            var sendEndpoint = await _masstransitBus.GetSendEndpoint(destinationQueueUri);
 
-                channel.BasicPublish("", eventName, null, body);
-            }
+            await sendEndpoint.Send<TMessage>(
+                values: command,
+                callback: ctx =>
+                    SetupSendContext(
+                        ctx: ctx,
+                        messageId: messageId,
+                        createdAt: createdAt));
         }
+
+        private void SetupSendContext<TMessage>(
+            SendContext<TMessage> ctx,
+            Guid messageId,
+            DateTime createdAt)
+            where TMessage : class
+        {
+            ctx.MessageId = messageId;
+            ctx.Headers.Set(
+                key: CreatedAtHeaderKey,
+                value: createdAt.ToString(format: "o", provider: CultureInfo.InvariantCulture));
+        }
+
+        //public async Task SendAsync<T>(
+        //    T command,
+        //    string queue) where T : class
+        //{
+        //     await SendAsync<T>(
+        //        command: command,
+        //        queue: queue,
+        //        messageId: Guid.NewGuid(),
+        //        createdAt: DateTime.UtcNow);
+        //}
+
+        //protected async Task SendAsync<TMessage>(
+        //    object command,
+        //    string queue,
+        //    Guid messageId,
+        //    DateTime createdAt)
+        //    where TMessage : class
+        //{
+        //    var factory = new ConnectionFactory() { HostName = "localhost" };
+        //    using (var connection = factory.CreateConnection())
+        //    using (var channel = connection.CreateModel())
+        //    {
+        //        var eventName = command.GetType().Name;
+        //        channel.QueueDeclare(eventName, false, false, false, null);
+        //        var message = JsonConvert.SerializeObject(command);
+        //        var body = Encoding.UTF8.GetBytes(message);
+
+        //        channel.BasicPublish("", eventName, null, body);
+        //    }
+        //}
     }
 }

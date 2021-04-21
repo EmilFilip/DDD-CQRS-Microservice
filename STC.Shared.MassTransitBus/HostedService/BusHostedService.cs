@@ -6,8 +6,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace STC.Shared.MassTransitBus.HostedService
 {
-
-
     /// <summary>
     /// Hosted service that automatically starts and stops a bus control.
     /// </summary>
