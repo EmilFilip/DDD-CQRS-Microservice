@@ -5,17 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\STC.Customer.Application\STC.Customer.Application.csproj" />
     <ProjectReference Include="..\STC.Customer.Infrastructure\STC.Customer.Infrastructure.csproj" />
-    <ProjectReference Include="..\STC.Shared.Cqrs\STC.Shared.Cqrs.csproj" />
+    <ProjectReference Include="..\STC.Shared.Infrastructure\STC.Shared.Infrastructure.csproj" />
     <ProjectReference Include="..\STC.Shared.MassTransitBus\STC.Shared.MassTransitBus.csproj" />
   </ItemGroup>
 

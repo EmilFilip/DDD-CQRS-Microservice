@@ -15,6 +15,11 @@ namespace STC.Customer.Application.RepositoryContracts
             int age,
             CancellationToken cancellationToken = default(CancellationToken));
 
+        Task UpdateCustomerUpdatedAsync(
+            Guid customerId,
+            bool updated,
+            CancellationToken cancellationToken = default(CancellationToken));
+
         Task InsertCustomerAsync(
             Domain.Models.Customer customer,
             CancellationToken cancellationToken = default(CancellationToken));

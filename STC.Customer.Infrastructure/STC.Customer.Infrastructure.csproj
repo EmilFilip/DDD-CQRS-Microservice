@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\STC.Customer.Application\STC.Customer.Application.csproj" />
     <ProjectReference Include="..\STC.Customer.Domain\STC.Customer.Domain.csproj" />
+    <ProjectReference Include="..\STC.Shared.Cqrs\STC.Shared.Cqrs.csproj" />
   </ItemGroup>
 
 </Project>

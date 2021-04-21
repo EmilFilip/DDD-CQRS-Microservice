@@ -10,5 +10,7 @@ namespace STC.Customer.Infrastructure.Entities
 
         [Required]
         public int Age { get; set; }
+
+        public bool Updated { get; set; }
     }
 }
