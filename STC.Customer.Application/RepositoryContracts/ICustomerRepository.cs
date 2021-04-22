@@ -18,6 +18,7 @@ namespace STC.Customer.Application.RepositoryContracts
         Task UpdateCustomerUpdatedAsync(
             Guid customerId,
             bool updated,
+            DateTime updatedAt,
             CancellationToken cancellationToken = default(CancellationToken));
 
         Task InsertCustomerAsync(

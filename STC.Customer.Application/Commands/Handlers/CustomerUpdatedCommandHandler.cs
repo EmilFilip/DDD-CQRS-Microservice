@@ -19,7 +19,10 @@ namespace STC.Customer.Application.Commands.Handlers
         public async Task HandleAsync(CustomerUpdatedCommandParameters command)
         {
             await _customerRepository
-                .UpdateCustomerUpdatedAsync(command.CustomerId, command.Updated);
+                .UpdateCustomerUpdatedAsync(
+                customerId: command.CustomerId, 
+                updated: command.Updated,
+                updatedAt: command.UpdatedAt);
         }
     }
 }

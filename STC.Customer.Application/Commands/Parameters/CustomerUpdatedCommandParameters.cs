@@ -7,13 +7,16 @@ namespace STC.Customer.Application.Commands.Parameters
     {
         public CustomerUpdatedCommandParameters(
             Guid customerId,
-            bool updated)
+            bool updated,
+            DateTime updatedAt)
         {
             CustomerId = customerId;
             Updated = updated;
+            UpdatedAt = updatedAt;
         }
 
         public Guid CustomerId { get; set; }
         public bool Updated { get; set; }
+        public DateTime UpdatedAt { get; }
     }
 }

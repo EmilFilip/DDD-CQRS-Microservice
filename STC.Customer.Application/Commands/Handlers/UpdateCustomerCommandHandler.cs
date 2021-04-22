@@ -27,9 +27,18 @@ namespace STC.Customer.Application.Commands.Handlers
                 .UpdateCustomerAsync(command.CustomerId, command.Age);
 
             await _serviceBus.PublishAsync<CustomerUpdated>(
-                    new { command.CustomerId });
+                    new
+                    {
+                        CustomerId = command.CustomerId,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+
             await _serviceBus.SendAsync<CustomerUpdated>(
-                new { command.CustomerId },
+                new
+                {
+                    CustomerId = command.CustomerId,
+                    UpdatedAt = DateTime.UtcNow
+                },
                 "CustomerService");
         }
     }

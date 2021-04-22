@@ -64,6 +64,7 @@ namespace STC.Customer.Infrastructure.Repositories
         public async Task UpdateCustomerUpdatedAsync(
             Guid customerId,
             bool updated,
+            DateTime updatedAt,
             CancellationToken cancellationToken = default)
         {
             var entity = await _customerDbContext.Customers.FindAsync(
@@ -73,6 +74,7 @@ namespace STC.Customer.Infrastructure.Repositories
             if (entity != null)
             {
                 entity.Updated = updated;
+                entity.UpdatedAt = updatedAt;
 
                 _customerDbContext.Update(entity);
                 await _customerDbContext.SaveChangesAsync(cancellationToken);

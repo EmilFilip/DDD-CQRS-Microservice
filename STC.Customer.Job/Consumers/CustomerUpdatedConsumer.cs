@@ -22,7 +22,8 @@ namespace STC.Customer.Job.Consumers
             await _commandExecutor.ExecuteAsync(
                 new CustomerUpdatedCommandParameters(
                     customerId: context.Message.CustomerId,
-                    updated: true));
+                    updated: true,
+                    updatedAt: context.Message.UpdatedAt));
         }
     }
 }
