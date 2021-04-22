@@ -5,6 +5,7 @@ using STC.Shared.MassTransitBus.HostedService;
 using STC.Customer.Job.Configuration;
 using STC.Customer.Infrastructure.Configuration;
 using STC.Shared.Infrastructure.Configuration;
+using STC.Shared.MassTransitBus.DependencyInjection;
 
 namespace STC.Customer.Job
 {
@@ -24,8 +25,10 @@ namespace STC.Customer.Job
                 {
                     var configuration = ConfigurationHelper.GetDefaultConfiguration();
 
-                    services.RegisterCommonContainer(configuration);
-                    services.RegisterMessageBroker(configuration);
+                    services.RegisterCommonContainer(configuration)
+                            .AddMassTransitBus()
+                            .RegisterMessageBroker(configuration);
+
                     services.AddSingleton<IHostedService, BusHostedService>();
                 });
     }

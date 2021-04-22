@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using STC.Customer.Infrastructure.Configuration;
+using STC.Shared.MassTransitBus.DependencyInjection;
 
 namespace STC.Customer.Api.Configuration
 {
@@ -12,7 +13,8 @@ namespace STC.Customer.Api.Configuration
             this IServiceCollection serviceCollection, 
             IConfiguration configuration)
         {
-            return serviceCollection.RegisterCommonContainer(configuration);
+            return serviceCollection.RegisterCommonContainer(configuration)
+                                    .AddMassTransitBus();
         }
     }
 }
