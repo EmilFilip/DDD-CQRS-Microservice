@@ -27,7 +27,7 @@ namespace STC.Customer.Job
 
                     services.RegisterCommonContainer(configuration)
                             .AddMassTransitBus()
-                            .RegisterMessageBroker(configuration);
+                            .RegisterMessageBroker();
 
                     services.AddSingleton<IHostedService, BusHostedService>();
                 });

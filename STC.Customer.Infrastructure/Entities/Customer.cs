@@ -13,6 +13,10 @@ namespace STC.Customer.Infrastructure.Entities
 
         public bool Updated { get; set; }
 
+        public bool Deleted { get; set; }
+
         public DateTime? UpdatedAt { get; set; }
+
+        public DateTime? DeletedAt { get; set; }
     }
 }

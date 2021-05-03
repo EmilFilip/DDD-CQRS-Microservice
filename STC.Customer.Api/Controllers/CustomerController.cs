@@ -68,5 +68,16 @@ namespace STC.Customer.Api.Controllers
 
             return Ok();
         }
+
+        [HttpDelete("")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteCustomer([FromBody] DeleteCustomerApiParameters parameters)
+        {
+            await _commandExecutor.ExecuteAsync(
+                new DeleteCustomerCommandParameters(
+                    customerId: parameters.CustomerId));
+
+            return Ok();
+        }
     }
 }

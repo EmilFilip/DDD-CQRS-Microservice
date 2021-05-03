@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,31 +13,19 @@ namespace STC.Customer.Job.Configuration
     public static class ServiceBusInstaller
     {
         public static void RegisterMessageBroker(
-            this IServiceCollection serviceCollection,
-            IConfiguration configuration)
+            this IServiceCollection serviceCollection)
         {
             serviceCollection.AddMassTransit(x =>
             {
-                x.AddConsumer<CustomerUpdatedConsumer>();
+                x.AddConsumers(Assembly.GetExecutingAssembly());
+
                 x.SetKebabCaseEndpointNameFormatter();
+
                 x.UsingRabbitMq((context, cfg) =>
                 {
-                    cfg.ReceiveEndpoint("CustomerService", e =>
-                    {
-                        e.ConfigureConsumer<CustomerUpdatedConsumer>(context);
-                    });
+                    cfg.ConfigureEndpoints(context);
                 });
             });
-        }
-
-        private static IBusControl SetupRabbitMq(
-            IServiceProvider serviceProvider,
-            IConfiguration configuration)
-        {
-            return RabbitMQConfiguration.ConfigureBus(
-                rabbitMQHostUri: configuration.GetValue<string>("RabbitMQ:HostUri"),
-                rabbitMQUsername: configuration.GetValue<string>("RabbitMQ:Username"),
-                rabbitMQPassword: configuration.GetValue<string>("RabbitMQ:Password"));
         }
     }
 }

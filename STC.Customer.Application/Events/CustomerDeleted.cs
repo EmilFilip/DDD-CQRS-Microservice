@@ -2,9 +2,9 @@
 
 namespace STC.Customer.Application.Events
 {
-    public interface CustomerUpdated
+    public interface CustomerDeleted
     {
         public Guid CustomerId { get; }
-        public DateTime UpdatedAt { get; }
+        public DateTime DeletedAt { get; }
     }
 }

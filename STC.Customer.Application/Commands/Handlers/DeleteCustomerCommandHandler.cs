@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using STC.Customer.Application.Commands.Parameters;
 using STC.Customer.Application.Events;
@@ -8,12 +10,12 @@ using STC.Shared.Infrastructure.ServiceBus;
 
 namespace STC.Customer.Application.Commands.Handlers
 {
-    public class UpdateCustomerCommandHandler : ICommandHandler<UpdateCustomerCommandParameters>
+    public class DeleteCustomerCommandHandler : ICommandHandler<DeleteCustomerCommandParameters>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IServiceBus _serviceBus;
 
-        public UpdateCustomerCommandHandler(
+        public DeleteCustomerCommandHandler(
             ICustomerRepository customerRepository,
             IServiceBus serviceBus)
         {
@@ -21,16 +23,16 @@ namespace STC.Customer.Application.Commands.Handlers
             _serviceBus = serviceBus ?? throw new ArgumentNullException(nameof(serviceBus));
         }
 
-        public async Task HandleAsync(UpdateCustomerCommandParameters command)
+        public async Task HandleAsync(DeleteCustomerCommandParameters command)
         {
             await _customerRepository
-                .UpdateCustomerAsync(command.CustomerId, command.Age);
+                .DeleteCustomerAsync(command.CustomerId);
 
-            await _serviceBus.PublishAsync<CustomerUpdated>(
+            await _serviceBus.PublishAsync<CustomerDeleted>(
                     new
                     {
                         CustomerId = command.CustomerId,
-                        UpdatedAt = DateTime.UtcNow
+                        DeletedAt = DateTime.UtcNow
                     });
         }
     }

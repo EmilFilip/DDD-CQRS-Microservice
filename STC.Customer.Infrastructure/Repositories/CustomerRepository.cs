@@ -61,6 +61,23 @@ namespace STC.Customer.Infrastructure.Repositories
             }
         }
 
+        public async Task DeleteCustomerAsync(
+            Guid customerId, CancellationToken 
+            cancellationToken = default)
+        {
+            var entity = await _customerDbContext.Customers.FindAsync(
+                        keyValues: new object[] { customerId },
+                        cancellationToken: cancellationToken);
+
+            if (entity != null)
+            {
+                entity.Deleted = true;
+
+                _customerDbContext.Update(entity);
+                await _customerDbContext.SaveChangesAsync(cancellationToken);
+            }
+        }
+
         public async Task UpdateCustomerUpdatedAsync(
             Guid customerId,
             bool updated,
@@ -75,6 +92,24 @@ namespace STC.Customer.Infrastructure.Repositories
             {
                 entity.Updated = updated;
                 entity.UpdatedAt = updatedAt;
+
+                _customerDbContext.Update(entity);
+                await _customerDbContext.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task UpdateCustomerDeletedAsync(
+            Guid customerId,
+            DateTime deletedAt,
+            CancellationToken cancellationToken = default)
+        {
+            var entity = await _customerDbContext.Customers.FindAsync(
+                                    keyValues: new object[] { customerId },
+                                    cancellationToken: cancellationToken);
+
+            if (entity != null)
+            {
+                entity.DeletedAt = deletedAt;
 
                 _customerDbContext.Update(entity);
                 await _customerDbContext.SaveChangesAsync(cancellationToken);
