@@ -1,15 +1,15 @@
 ﻿using STC.Shared.Cqrs.Query;
+using STC.Shared.Infrastructure.Authentication;
 
 namespace STC.Authentication.Application.Queries.Results
 {
     public class GetLoginQueryResult : IQueryResult
     {
-        public GetLoginQueryResult(string token)
+        public GetLoginQueryResult(AccessToken userAccessToken)
         {
-            Token = token;
+            UserAccessToken = userAccessToken;
         }
 
-
-        public string Token { get; private set; }
+        public AccessToken UserAccessToken { get; private set; }
     }
 }

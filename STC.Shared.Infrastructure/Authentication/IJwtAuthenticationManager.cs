@@ -2,6 +2,6 @@
 {
     public interface IJwtAuthenticationManager
     {
-        string GetToken(string username);
+        AccessToken GetToken(string username);
     }
 }

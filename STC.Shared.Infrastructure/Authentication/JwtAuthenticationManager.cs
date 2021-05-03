@@ -16,7 +16,7 @@ namespace STC.Shared.Infrastructure.Authentication
             _key = key;
         }
 
-        public string GetToken(string username)
+        public AccessToken GetToken(string username)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(_key);
@@ -26,7 +26,7 @@ namespace STC.Shared.Infrastructure.Authentication
             {
                 new Claim(ClaimTypes.Name, username)
             }),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddMinutes(2),
                 SigningCredentials =
                 new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),
@@ -34,7 +34,19 @@ namespace STC.Shared.Infrastructure.Authentication
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return tokenHandler.WriteToken(token);
+            return new AccessToken(
+                token: tokenHandler.WriteToken(token),
+                expiresIn: GetTokenExpirationTimeInMinutes(token));
+        }
+
+        private int GetTokenExpirationTimeInMinutes(SecurityToken token)
+        {
+            if (token == null)
+            {
+                return 0;
+            }
+
+            return (int)(token.ValidTo - token.ValidFrom).TotalSeconds;
         }
     }
 }

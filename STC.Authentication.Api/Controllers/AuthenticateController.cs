@@ -34,12 +34,12 @@ namespace STC.Authentication.Api.Controllers
                     password: userCredentials.Password));
 
 
-            if (string.IsNullOrWhiteSpace(results.Token))
+            if (string.IsNullOrWhiteSpace(results.UserAccessToken?.Token))
             {
                 return Unauthorized();
             }
 
-            return Ok(results.Token);
+            return Ok(results.UserAccessToken);
         }
     }
 }
