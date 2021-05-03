@@ -10,7 +10,7 @@ namespace STC.Customer.Api.Configuration
     public static class ServicesInstaller
     {
         public static IServiceCollection RegisterDependencies(
-            this IServiceCollection serviceCollection, 
+            this IServiceCollection serviceCollection,
             IConfiguration configuration)
         {
             return serviceCollection.RegisterCommonContainer(configuration)

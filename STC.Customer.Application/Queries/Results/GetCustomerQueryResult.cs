@@ -13,7 +13,7 @@ namespace STC.Customer.Application.Queries.Results
             Age = age;
         }
 
-        public Guid CustomerId { get; set; }
-        public int Age { get; set; }
+        public Guid CustomerId { get; private set; }
+        public int Age { get; private set; }
     }
 }

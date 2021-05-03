@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using STC.Customer.Application.Commands.DTOs;
@@ -11,8 +12,9 @@ using STC.Shared.Cqrs.Query;
 
 namespace STC.Customer.Api.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("customer")]
+    [Route("[controller]")]
     public class CustomerController : ControllerBase
     {
         private readonly ICommandExecutor _commandExecutor;

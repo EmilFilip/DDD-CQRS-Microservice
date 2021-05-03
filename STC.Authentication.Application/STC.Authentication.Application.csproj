@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\STC.Authentication.Domain\STC.Authentication.Domain.csproj" />
+    <ProjectReference Include="..\STC.Shared.Cqrs\STC.Shared.Cqrs.csproj" />
+    <ProjectReference Include="..\STC.Shared.Infrastructure\STC.Shared.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

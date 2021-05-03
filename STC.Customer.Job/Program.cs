@@ -1,11 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using STC.Shared.MassTransitBus.HostedService;
-using STC.Customer.Job.Configuration;
+using Microsoft.Extensions.Hosting;
 using STC.Customer.Infrastructure.Configuration;
+using STC.Customer.Job.Configuration;
 using STC.Shared.Infrastructure.Configuration;
 using STC.Shared.MassTransitBus.DependencyInjection;
+using STC.Shared.MassTransitBus.HostedService;
 
 namespace STC.Customer.Job
 {

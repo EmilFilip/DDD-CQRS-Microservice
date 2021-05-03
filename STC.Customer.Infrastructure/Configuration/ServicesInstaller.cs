@@ -7,6 +7,7 @@ using STC.Customer.Application.RepositoryContracts;
 using STC.Customer.Infrastructure.DBContexts;
 using STC.Customer.Infrastructure.Repositories;
 using STC.Shared.Cqrs.DependencyInjection;
+using STC.Shared.Infrastructure.Authentication.DependencyInjection;
 
 namespace STC.Customer.Infrastructure.Configuration
 {
@@ -25,6 +26,7 @@ namespace STC.Customer.Infrastructure.Configuration
                     {
                         options.UseSqlServer(configuration.GetConnectionString("CustomerDbConnection"));
                     })
+                 .RegisterAuthentication()
                  .AddScoped<ICustomerRepository, CustomerRepository>();
         }
     }

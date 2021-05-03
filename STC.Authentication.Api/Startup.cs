@@ -3,18 +3,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using STC.Customer.Api.Configuration;
+using STC.Authentication.Api.Configuration;
 
-namespace STC.Customer.Api
+namespace STC.Authentication.Api
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -23,11 +23,11 @@ namespace STC.Customer.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Customer Microservice", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Authentication Microservice", Version = "v1" });
             });
 
             services.RegisterDependencies(Configuration);
-            services.RegisterMessageBroker(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +43,7 @@ namespace STC.Customer.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Customer Microservice V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication Microservice V1");
             });
 
             app.UseRouting();
