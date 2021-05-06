@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "e55841fe-9ceb-4f2d-a398-a340d9961524",
+		"name": "STC Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"jwt\", data.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\": \"password1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{authenticate-service-login-endpoint}}",
+					"host": [
+						"{{authenticate-service-login-endpoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert New Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"age\": 14\r\n}"
+				},
+				"url": {
+					"raw": "{{customer-service-get-customer-endpoint}}",
+					"host": [
+						"{{customer-service-get-customer-endpoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{customer-service-get-customer-endpoint}}EBDD68CC-A428-48B6-84FE-6473FB74709D",
+					"host": [
+						"{{customer-service-get-customer-endpoint}}EBDD68CC-A428-48B6-84FE-6473FB74709D"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerId\": \"58D80A61-249A-4DA8-9292-AD0E9A2D5F05\",\r\n  \"age\": 25\r\n}"
+				},
+				"url": {
+					"raw": "{{customer-service-get-customer-endpoint}}",
+					"host": [
+						"{{customer-service-get-customer-endpoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerId\": \"A0B15C59-2D90-4E13-809B-A9F561512E85\"\r\n}"
+				},
+				"url": {
+					"raw": "{{customer-service-get-customer-endpoint}}",
+					"host": [
+						"{{customer-service-get-customer-endpoint}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

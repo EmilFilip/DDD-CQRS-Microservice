@@ -9,11 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STC.Customer.Domain", "STC.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STC.Customer.Application", "STC.Customer.Application\STC.Customer.Application.csproj", "{5BAD4C88-1048-46B6-AEC6-FEA0C5B348C1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D6AB9F39-A3EA-4ECA-9CFF-5635E8530D14}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Users\EF-Soft\OneDrive\Desktop\STC Microservices.postman_collection.json = ..\..\..\Users\EF-Soft\OneDrive\Desktop\STC Microservices.postman_collection.json
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NugetPackages", "NugetPackages", "{7AE796F0-80D3-4AA6-A36F-556D6D6D3C24}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STC.Shared.Cqrs", "STC.Shared.Cqrs\STC.Shared.Cqrs.csproj", "{DFD7A25C-2DFF-4948-9738-33F4A0253938}"
@@ -37,6 +32,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STC.Authentication.Application", "STC.Authentication.Application\STC.Authentication.Application.csproj", "{9BA13A5B-9B41-4C89-8B22-C8FF6E5743AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STC.Authentication.Api", "STC.Authentication.Api\STC.Authentication.Api.csproj", "{85E04CF7-F616-48B8-A09E-17BF37BC416A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD83433F-D1CB-48F5-B8E9-7F59A323141C}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\STC Microservices.postman_collection.json = Tests\STC Microservices.postman_collection.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
