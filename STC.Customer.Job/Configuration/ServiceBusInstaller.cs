@@ -1,11 +1,7 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MassTransit;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using STC.Customer.Job.Consumers;
-using STC.Shared.MassTransitBus.BusConfigurations;
 
 namespace STC.Customer.Job.Configuration
 {

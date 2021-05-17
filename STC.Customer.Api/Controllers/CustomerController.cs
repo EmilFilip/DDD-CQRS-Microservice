@@ -69,13 +69,13 @@ namespace STC.Customer.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("")]
+        [HttpDelete("{customerId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> DeleteCustomer([FromBody] DeleteCustomerApiParameters parameters)
+        public async Task<IActionResult> DeleteCustomer(Guid customerId)
         {
             await _commandExecutor.ExecuteAsync(
                 new DeleteCustomerCommandParameters(
-                    customerId: parameters.CustomerId));
+                    customerId: customerId));
 
             return Ok();
         }

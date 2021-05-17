@@ -21,6 +21,12 @@ namespace STC.Authentication.Api.Controllers
         {
             _queryExecutor = queryExecutor;
         }
+        [AllowAnonymous]
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok();
+        }
 
         [AllowAnonymous]
         [HttpPost("login")]

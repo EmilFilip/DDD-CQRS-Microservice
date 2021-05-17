@@ -33,10 +33,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STC.Authentication.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STC.Authentication.Api", "STC.Authentication.Api\STC.Authentication.Api.csproj", "{85E04CF7-F616-48B8-A09E-17BF37BC416A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD83433F-D1CB-48F5-B8E9-7F59A323141C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0591A11B-910E-47E5-A506-F38A5A2AD989}"
 	ProjectSection(SolutionItems) = preProject
-		Tests\STC Microservices.postman_collection.json = Tests\STC Microservices.postman_collection.json
+		SolutionItems\STC Microservices.postman_collection.json = SolutionItems\STC Microservices.postman_collection.json
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{2DA145B7-5B73-4DDE-BB17-F4D4A3939687}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STC.Gateway.API", "STC.Gateway.API\STC.Gateway.API.csproj", "{D84C952C-7504-4CDA-8350-40597A354493}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,6 +96,10 @@ Global
 		{85E04CF7-F616-48B8-A09E-17BF37BC416A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85E04CF7-F616-48B8-A09E-17BF37BC416A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85E04CF7-F616-48B8-A09E-17BF37BC416A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84C952C-7504-4CDA-8350-40597A354493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84C952C-7504-4CDA-8350-40597A354493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84C952C-7504-4CDA-8350-40597A354493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84C952C-7504-4CDA-8350-40597A354493}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +117,7 @@ Global
 		{51E1EDB8-7466-41FD-8936-1C86EB988959} = {E23E16DB-17BB-4C28-A0BB-D2EA2AC5D269}
 		{9BA13A5B-9B41-4C89-8B22-C8FF6E5743AE} = {E23E16DB-17BB-4C28-A0BB-D2EA2AC5D269}
 		{85E04CF7-F616-48B8-A09E-17BF37BC416A} = {E23E16DB-17BB-4C28-A0BB-D2EA2AC5D269}
+		{D84C952C-7504-4CDA-8350-40597A354493} = {2DA145B7-5B73-4DDE-BB17-F4D4A3939687}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B305E924-CAF6-43FB-B911-FCC9B8DC2550}
